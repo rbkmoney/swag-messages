@@ -1,0 +1,14 @@
+type: object
+required:
+  - converstationId
+  - messages
+  - status
+properties:
+  converstationId:
+    $ref: '#/definitions/ConversationID'
+  messages:
+    type: array
+    items:
+      $ref: '#/definitions/Message'
+  status:
+    $ref: '#/definitions/ConversationStatus'

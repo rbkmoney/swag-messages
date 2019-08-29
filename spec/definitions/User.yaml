@@ -1,0 +1,12 @@
+type: object
+required:
+  - userId
+  - email
+  - fullName
+properties:
+  userId:
+    $ref: '#/definitions/UserID'
+  email:
+    type: string
+  fullName:
+    type: string

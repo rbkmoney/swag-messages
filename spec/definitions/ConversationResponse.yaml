@@ -1,0 +1,15 @@
+type: object
+required:
+  - conversations
+  - messages
+  - status
+properties:
+  conversations:
+    $ref: '#/definitions/Conversation'
+  users:
+    type: object
+    properties:
+      userId:
+        $ref: '#/definitions/UserID'
+      user:
+        $ref: '#/definitions/User'

@@ -1,0 +1,35 @@
+get:
+  tags:
+    - Conversations
+  operationId: getConversations
+  parameters:
+    - in: body
+      name: getConversationParams
+      required: true
+      schema:
+        $ref: '#/definitions/GetConversationParams'
+  responses:
+    '200':
+      schema:
+        $ref: '#/definitions/ConversationResponse'
+    '404':
+      schema:
+        $ref: '#/definitions/ConversationNotFound'
+post:
+  tags:
+    - Conversations
+  operationId: saveConversations
+  parameters:
+    - in: body
+      name: saveConversationParams
+      required: true
+      schema:
+        $ref: '#/definitions/SaveConversationParams'
+  responses:
+    '200':
+      description: Комментарии сохранены
+    '400':
+      schema:
+        $ref: '#/definitions/UsersNotProvided'
+
+
