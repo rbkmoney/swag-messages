@@ -30,6 +30,6 @@ post:
       description: Комментарии сохранены
     '400':
       schema:
-        $ref: '#/definitions/UserNotProvided'
+        $ref: '#/definitions/UsersNotProvided'
 
 
