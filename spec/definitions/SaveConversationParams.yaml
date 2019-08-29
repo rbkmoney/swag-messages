@@ -1,0 +1,12 @@
+type: object
+required:
+  - conversationsIds
+properties:
+  conversations:
+    type: array
+    items:
+      $ref: '#/definitions/Conversation'
+  users:
+    type: array
+    items:
+      $ref: '#/definitions/User'

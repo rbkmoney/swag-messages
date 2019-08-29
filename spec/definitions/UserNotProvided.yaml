@@ -1,0 +1,9 @@
+type: object
+description: Предоставлены не все пользователи
+required:
+  - ids
+properties:
+  ids:
+    type: array
+    items:
+      $ref: '#/definitions/UserID'
