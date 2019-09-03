@@ -5,11 +5,10 @@ required:
   - status
 properties:
   conversations:
-    $ref: '#/definitions/Conversation'
+    type: array
+    items:
+      $ref: '#/definitions/Conversation'
   users:
     type: object
-    properties:
-      userId:
-        $ref: '#/definitions/UserID'
-      user:
-        $ref: '#/definitions/User'
+    additionalProperties:
+      $ref: '#/definitions/User'
