@@ -5,4 +5,4 @@ properties:
   ids:
     type: array
     items:
-      $ref: '#/definitions/ConversationID'
+      $ref: '#/components/schemas/UserID'

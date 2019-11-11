@@ -6,10 +6,10 @@ required:
   - timestamp
 properties:
   messageId:
-    $ref: '#/definitions/MessageID'
+    $ref: '#/components/schemas/MessageID'
   text:
     type: string
   userId:
-    $ref: '#/definitions/UserID'
+    $ref: '#/components/schemas/UserID'
   timestamp:
     type: string

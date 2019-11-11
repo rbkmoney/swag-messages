@@ -3,33 +3,26 @@ get:
     - Conversations
   operationId: getConversations
   parameters:
-    - in: body
-      name: getConversationParams
-      required: true
-      schema:
-        $ref: '#/definitions/GetConversationParams'
+    - $ref: '#/components/parameters/conversationId'
+    - $ref: '#/components/parameters/conversationFilter'
   responses:
     '200':
-      schema:
-        $ref: '#/definitions/ConversationResponse'
+      description: Комментарии
+      $ref: "#/components/responses/ConversationResponse"
     '404':
-      schema:
-        $ref: '#/definitions/ConversationNotFound'
+      $ref: '#/components/responses/ConversationNotFound'
 post:
   tags:
     - Conversations
   operationId: saveConversations
-  parameters:
-    - in: body
-      name: saveConversationParams
-      required: true
-      schema:
-        $ref: '#/definitions/SaveConversationParams'
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/SaveConversationParams'
+    required: true
   responses:
     '200':
       description: Комментарии сохранены
     '400':
-      schema:
-        $ref: '#/definitions/UsersNotProvided'
-
-
+      $ref: '#/components/responses/UsersNotProvided'

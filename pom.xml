@@ -126,6 +126,12 @@
             <version>${javax-validation-api-version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>2.0.10</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -141,25 +147,23 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>io.swagger</groupId>
+                        <groupId>io.swagger.codegen.v3</groupId>
                         <artifactId>swagger-codegen-maven-plugin</artifactId>
-                        <version>2.4.8</version>
+                        <version>3.0.13</version>
                         <executions>
                             <execution>
                                 <id>generate-server</id>
-                                <phase>generate-sources</phase>
                                 <goals>
                                     <goal>generate</goal>
                                 </goals>
                                 <configuration>
                                     <inputSpec>web_deploy/swagger.yaml</inputSpec>
+                                    <language>java</language>
                                     <configOptions>
                                         <dateLibrary>java8</dateLibrary>
                                     </configOptions>
-
                                     <language>spring</language>
                                     <library>spring-mvc</library>
-
                                     <apiPackage>${default.package}.api</apiPackage>
                                     <modelPackage>${default.package}.model</modelPackage>
                                 </configuration>
@@ -174,25 +178,23 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>io.swagger</groupId>
+                        <groupId>io.swagger.codegen.v3</groupId>
                         <artifactId>swagger-codegen-maven-plugin</artifactId>
-                        <version>2.4.8</version>
+                        <version>3.0.13</version>
                         <executions>
                             <execution>
                                 <id>generate-client</id>
-                                <phase>generate-sources</phase>
                                 <goals>
                                     <goal>generate</goal>
                                 </goals>
                                 <configuration>
                                     <inputSpec>web_deploy/swagger.yaml</inputSpec>
+                                    <language>java</language>
                                     <configOptions>
                                         <dateLibrary>java8</dateLibrary>
                                     </configOptions>
-
                                     <language>java</language>
                                     <library>resttemplate</library>
-
                                     <apiPackage>${default.package}.api</apiPackage>
                                     <modelPackage>${default.package}.model</modelPackage>
                                 </configuration>
@@ -201,7 +203,6 @@
                     </plugin>
                 </plugins>
             </build>
-
         </profile>
     </profiles>
 </project>

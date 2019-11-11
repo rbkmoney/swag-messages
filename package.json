@@ -1,6 +1,6 @@
 {
   "name": "swag-messages",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "build": "node ./scripts/build.js",
@@ -17,10 +17,11 @@
     "gulp-connect": "^5.7.0",
     "gulp-util": "^3.0.8",
     "json-merge-patch": "^0.2.3",
-    "npm": "^6.10.1",
-    "portfinder": "^1.0.20",
+    "npm": "^6.13.0",
+    "portfinder": "^1.0.25",
     "shelljs": "^0.8.3",
-    "swagger-repo": "^1.0.0",
-    "swagger-ui": "^2.1.4"
+    "swagger-repo": "^2.0.0-rc.15",
+    "swagger-ui": "^3.24.2",
+    "express": "^4.17.1"
   }
 }

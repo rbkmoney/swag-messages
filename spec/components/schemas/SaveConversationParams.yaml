@@ -5,8 +5,8 @@ properties:
   conversations:
     type: array
     items:
-      $ref: '#/definitions/Conversation'
+      $ref: '#/components/schemas/Conversation'
   users:
     type: array
     items:
-      $ref: '#/definitions/User'
+      $ref: '#/components/schemas/User'
