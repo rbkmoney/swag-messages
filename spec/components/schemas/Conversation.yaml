@@ -5,10 +5,10 @@ required:
   - status
 properties:
   conversationId:
-    $ref: '#/definitions/ConversationID'
+    $ref: '#/components/schemas/ConversationID'
   messages:
     type: array
     items:
-      $ref: '#/definitions/Message'
+      $ref: '#/components/schemas/Message'
   status:
-    $ref: '#/definitions/ConversationStatus'
+    $ref: '#/components/schemas/ConversationStatus'

@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const util = require('gulp-util');
 const gulpConnect = require('gulp-connect');
-const connect = require('connect');
+const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const exec = require('child_process').exec;
@@ -13,7 +13,7 @@ const SPEC_DIR = 'spec';
 
 gulp.task('edit', function(done) {
     portfinder.getPort({port: 5000}, function (err, port) {
-        let app = connect();
+        let app = express();
         app.use(swaggerRepo.swaggerEditorMiddleware());
         app.listen(port);
         util.log(util.colors.green('swagger-editor started http://localhost:' + port));
@@ -24,12 +24,12 @@ gulp.task('edit', function(done) {
 gulp.task('build', function (cb) {
     exec('npm run build', function (err, stdout, stderr) {
         console.log(stderr);
-        cb(err);
+        cb(err)
     });
 });
 
 gulp.task('reload', gulp.series('build', function (done) {
-    gulp.src(DIST_DIR).pipe(gulpConnect.reload())
+    gulp.src(DIST_DIR).pipe(gulpConnect.reload());
     done()
 }));
 
@@ -50,7 +50,7 @@ gulp.task('ui', function (done) {
         ]
       }
     });
-    done();
+    done()
   });
 });
 

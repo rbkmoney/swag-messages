@@ -4,7 +4,7 @@ required:
 properties:
   externalID:
     x-rebillyMerge:
-      - $ref: '#/definitions/ExternalID'
+      - $ref: '#/components/schemas/ExternalID'
       - description: Переданное значение `externalID`, для которого обнаружен конфликт параметров запроса
   id:
     description: Идентификатор сущности, созданной предыдущим запросом с указанным `externalID`
