@@ -1,0 +1,376 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "RBKmoney Messages API",
+    "description": "Messages API"
+  },
+  "servers": [
+    {
+      "url": "https://{subdomain}.rbk.money/messages/{version}",
+      "variables": {
+        "subdomain": {
+          "default": "api"
+        },
+        "version": {
+          "enum": [
+            "v1"
+          ],
+          "default": "v1"
+        }
+      }
+    }
+  ],
+  "security": [
+    {
+      "APIKey": []
+    }
+  ],
+  "paths": {
+    "/conversation": {
+      "get": {
+        "tags": [
+          "Conversations"
+        ],
+        "operationId": "getConversations",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/conversationId"
+          },
+          {
+            "$ref": "#/components/parameters/conversationFilter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Комментарии",
+            "$ref": "#/components/responses/ConversationResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/AccessForbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/ConversationNotFound"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Conversations"
+        ],
+        "operationId": "saveConversations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveConversationParams"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Комментарии сохранены"
+          },
+          "400": {
+            "$ref": "#/components/responses/UsersNotProvided"
+          },
+          "401": {
+            "$ref": "#/components/responses/AccessForbidden"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GeneralError": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Conversation": {
+        "type": "object",
+        "required": [
+          "conversationId",
+          "messages",
+          "status"
+        ],
+        "properties": {
+          "conversationId": {
+            "$ref": "#/components/schemas/ConversationID"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "status": {
+            "$ref": "#/components/schemas/ConversationStatus"
+          }
+        }
+      },
+      "ConversationFilter": {
+        "type": "object",
+        "properties": {
+          "conversationStatus": {
+            "$ref": "#/components/schemas/ConversationStatus"
+          }
+        }
+      },
+      "ConversationID": {
+        "type": "string"
+      },
+      "ConversationResponse": {
+        "type": "object",
+        "required": [
+          "conversations",
+          "users"
+        ],
+        "properties": {
+          "conversations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Conversation"
+            }
+          },
+          "users": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/UserID"
+                },
+                "user": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ConversationStatus": {
+        "type": "string",
+        "enum": [
+          "Actual",
+          "Outdated"
+        ]
+      },
+      "ExternalID": {
+        "description": "Уникальный в рамках платформы идентификатор сущности для данного участника.\n\nИспользуется для обеспечения идемпотентности запроса.\n",
+        "type": "string",
+        "maxLength": 40,
+        "minLength": 1
+      },
+      "ExternalIDConflictError": {
+        "type": "object",
+        "required": [
+          "externalID"
+        ],
+        "properties": {
+          "externalID": {
+            "x-rebillyMerge": [
+              {
+                "$ref": "#/components/schemas/ExternalID"
+              },
+              {
+                "description": "Переданное значение `externalID`, для которого обнаружен конфликт параметров запроса"
+              }
+            ]
+          },
+          "id": {
+            "description": "Идентификатор сущности, созданной предыдущим запросом с указанным `externalID`",
+            "type": "string"
+          },
+          "message": {
+            "description": "Человекочитаемое описание ошибки",
+            "type": "string"
+          }
+        }
+      },
+      "Message": {
+        "type": "object",
+        "required": [
+          "messageId",
+          "text",
+          "userId",
+          "timestamp"
+        ],
+        "properties": {
+          "messageId": {
+            "$ref": "#/components/schemas/MessageID"
+          },
+          "text": {
+            "type": "string"
+          },
+          "userId": {
+            "$ref": "#/components/schemas/UserID"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        }
+      },
+      "MessageID": {
+        "type": "string"
+      },
+      "SaveConversationParams": {
+        "type": "object",
+        "required": [
+          "conversationsIds"
+        ],
+        "properties": {
+          "conversations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Conversation"
+            }
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "SubError": {
+        "description": "Детализация описания ошибки\n",
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "description": "Детализация кода ошибки",
+            "type": "string"
+          },
+          "subError": {
+            "$ref": "#/components/schemas/SubError"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "required": [
+          "userId",
+          "email",
+          "fullName"
+        ],
+        "properties": {
+          "userId": {
+            "$ref": "#/components/schemas/UserID"
+          },
+          "email": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          }
+        }
+      },
+      "UserID": {
+        "type": "string"
+      },
+      "UsersNotProvided": {
+        "type": "object",
+        "required": [
+          "ids"
+        ],
+        "properties": {
+          "ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserID"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "AccessForbidden": {
+        "description": "Ошибка авторизации"
+      },
+      "ConversationNotFound": {
+        "description": "Комментарии не найдены",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GeneralError"
+            }
+          }
+        }
+      },
+      "ConversationResponse": {
+        "description": "ConversationResponse",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ConversationResponse"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Заданный ресурс не найден",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GeneralError"
+            }
+          }
+        }
+      },
+      "UsersNotProvided": {
+        "description": "Предоставлены не все пользователи",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UsersNotProvided"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "conversationFilter": {
+        "name": "filter",
+        "in": "query",
+        "schema": {
+          "type": "object",
+          "$ref": "#/components/schemas/ConversationFilter"
+        }
+      },
+      "conversationId": {
+        "name": "conversationId",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ConversationID"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "APIKey": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Для аутентификации вызовов мы используем [JWT](https://jwt.io). Cоответствующий ключ передается в заголовке.\n```shell\n  Authorization: Bearer {TOKENIZATION|PRIVATE_JWT}\n```\n"
+      }
+    }
+  }
+}
