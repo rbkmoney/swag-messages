@@ -8,9 +8,11 @@ get:
   responses:
     '200':
       description: Комментарии
-      $ref: "#/components/responses/ConversationResponse"
+      $ref: '#/components/responses/ConversationResponse'
+    '401':
+      $ref: '#/components/responses/AccessForbidden'
     '404':
-      $ref: '#/components/responses/ConversationNotFound'
+      $ref: '#/components/responses/NotFound'
 post:
   tags:
     - Conversations
@@ -26,3 +28,7 @@ post:
       description: Комментарии сохранены
     '400':
       $ref: '#/components/responses/UsersNotProvided'
+    '401':
+      $ref: '#/components/responses/AccessForbidden'
+    '404':
+      $ref: '#/components/responses/NotFound'
