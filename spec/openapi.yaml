@@ -14,8 +14,3 @@ servers:
         default: v1
 security:
   - APIKey: []
-responses:
-  '401':
-    $ref: '#/components/responses/AccessForbidden'
-  '404':
-    $ref: '#/components/responses/NotFound'
