@@ -11,8 +11,6 @@ get:
       $ref: '#/components/responses/ConversationResponse'
     '401':
       $ref: '#/components/responses/AccessForbidden'
-    '404':
-      $ref: '#/components/responses/NotFound'
 post:
   tags:
     - Conversations
@@ -30,5 +28,3 @@ post:
       $ref: '#/components/responses/UsersNotProvided'
     '401':
       $ref: '#/components/responses/AccessForbidden'
-    '404':
-      $ref: '#/components/responses/NotFound'
