@@ -1,13 +1,15 @@
-const jpointer = require('json-pointer');
-const mergePatch = require('json-merge-patch');
+var jpointer = require('json-pointer');
+var mergePatch = require('json-merge-patch');
 
 module.exports = {
   pathExpression: '$..["x-rebillyMerge"]',
-  init: function(swagger) {
-    console.log('* x-rebillyMerge plugin');
+  init: function(_swagger, options) {
+    if (options.verbose) {
+      console.log('* x-rebillyMerge plugin');
+    }
   },
   process: function(parent, name, jsonpath, swagger) {
-    let value = parent[name];
+    var value = parent[name];
     if (!Array.isArray(value)) {
       throw Error('x-rebillyMerge argument should be array at ' + jsonpath);
     }
@@ -25,4 +27,4 @@ module.exports = {
   finish: function(swagger) {
     // TODO: cleanup unused $refs
   },
-};
+}
