@@ -119,9 +119,10 @@ components:
         - externalID
       properties:
         externalID:
-          x-rebillyMerge:
-            - $ref: '#/components/schemas/ExternalID'
-            - description: 'Переданное значение `externalID`, для которого обнаружен конфликт параметров запроса'
+          description: 'Переданное значение `externalID`, для которого обнаружен конфликт параметров запроса'
+          type: string
+          maxLength: 40
+          minLength: 1
         id:
           description: 'Идентификатор сущности, созданной предыдущим запросом с указанным `externalID`'
           type: string
