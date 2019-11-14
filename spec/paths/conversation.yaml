@@ -4,7 +4,7 @@ get:
   operationId: getConversations
   parameters:
     - $ref: '#/components/parameters/conversationId'
-    - $ref: '#/components/parameters/conversationFilter'
+    - $ref: '#/components/parameters/conversationStatus'
   responses:
     '200':
       description: Комментарии

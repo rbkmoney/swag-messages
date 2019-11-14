@@ -1,5 +1,0 @@
-name: filter
-in: query
-schema:
-  type: object
-  $ref: '#/components/schemas/ConversationFilter'
