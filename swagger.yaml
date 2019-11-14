@@ -22,7 +22,7 @@ paths:
       operationId: getConversations
       parameters:
         - $ref: '#/components/parameters/conversationId'
-        - $ref: '#/components/parameters/conversationFilter'
+        - $ref: '#/components/parameters/conversationStatus'
       responses:
         '200':
           description: Комментарии
@@ -224,12 +224,6 @@ components:
           schema:
             $ref: '#/components/schemas/UsersNotProvided'
   parameters:
-    conversationFilter:
-      name: filter
-      in: query
-      schema:
-        type: object
-        $ref: '#/components/schemas/ConversationFilter'
     conversationId:
       name: conversationId
       in: query
@@ -238,6 +232,11 @@ components:
         type: array
         items:
           $ref: '#/components/schemas/ConversationID'
+    conversationStatus:
+      name: conversationStatus
+      in: query
+      schema:
+        $ref: '#/components/schemas/ConversationStatus'
   securitySchemes:
     APIKey:
       type: http
