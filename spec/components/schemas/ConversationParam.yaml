@@ -8,4 +8,4 @@ properties:
   messages:
     type: array
     items:
-      $ref: '#/components/schemas/SavedMessage'
+      $ref: '#/components/schemas/MessageParam'
