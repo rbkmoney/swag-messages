@@ -1,12 +1,3 @@
-type: object
-required:
-  - conversationsIds
-properties:
-  conversations:
-    type: array
-    items:
-      $ref: '#/components/schemas/Conversation'
-  users:
-    type: array
-    items:
-      $ref: '#/components/schemas/User'
+type: array
+items:
+  $ref: '#/components/schemas/ConversationParam'

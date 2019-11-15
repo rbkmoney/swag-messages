@@ -26,7 +26,5 @@ post:
   responses:
     '200':
       description: Комментарии сохранены
-    '400':
-      $ref: '#/components/responses/UsersNotProvided'
     '401':
       $ref: '#/components/responses/AccessForbidden'
