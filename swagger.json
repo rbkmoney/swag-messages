@@ -73,9 +73,6 @@
           "200": {
             "description": "Комментарии сохранены"
           },
-          "400": {
-            "$ref": "#/components/responses/UsersNotProvided"
-          },
           "401": {
             "$ref": "#/components/responses/AccessForbidden"
           }
@@ -128,6 +125,24 @@
       },
       "ConversationID": {
         "type": "string"
+      },
+      "ConversationParam": {
+        "type": "object",
+        "required": [
+          "conversationId",
+          "messages"
+        ],
+        "properties": {
+          "conversationId": {
+            "$ref": "#/components/schemas/ConversationID"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageParam"
+            }
+          }
+        }
       },
       "ConversationResponse": {
         "type": "object",
@@ -221,24 +236,25 @@
       "MessageID": {
         "type": "string"
       },
-      "SaveConversationParams": {
+      "MessageParam": {
         "type": "object",
         "required": [
-          "conversationsIds"
+          "messageId",
+          "text"
         ],
         "properties": {
-          "conversations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Conversation"
-            }
+          "messageId": {
+            "$ref": "#/components/schemas/MessageID"
           },
-          "users": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/User"
-            }
+          "text": {
+            "type": "string"
           }
+        }
+      },
+      "SaveConversationParams": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ConversationParam"
         }
       },
       "SubError": {
@@ -324,16 +340,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/GeneralError"
-            }
-          }
-        }
-      },
-      "UsersNotProvided": {
-        "description": "Предоставлены не все пользователи",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/UsersNotProvided"
             }
           }
         }
