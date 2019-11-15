@@ -1,5 +1,0 @@
-description: Предоставлены не все пользователи
-content:
-  application/json:
-    schema:
-      $ref: '#/components/schemas/UsersNotProvided'
