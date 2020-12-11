@@ -1,4 +1,7 @@
-box: node:12
+box:
+  id: node:12
+  username: ${DOCKER_ID}
+  password: ${DOCKER_PWD}
 
 build:
   steps:
